@@ -1,3 +1,5 @@
+var input = process.argv.slice(2);
+
 var request = require('request');
 console.log("welcome to the GitHub Avatar Downloader!");
 
@@ -57,4 +59,7 @@ function getAvatar(err, str) {
   });
 }
 
-getRepoContributors('Lighthouse-labs', 'iOS_Swift_1_Playground', getAvatar);
+getRepoContributors(input[0], input[1], getAvatar);
+
+// e.g., 'Lighthouse-labs', 'iOS_Swift_1_Playground'
+
