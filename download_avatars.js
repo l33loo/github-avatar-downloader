@@ -1,5 +1,5 @@
 var request = require('request');
-var githubToken = require('secrets');
+var githubToken = require('./secrets');
 
 
 console.log("welcome to the GitHub Avatar Downloader!");
@@ -9,7 +9,8 @@ function getRepoContributors(repoOwner, repoName, cb) {
     url: 'https://api.github.com/repos/' + repoOwner + '/' + repoName + '/contributors',
     headers: {
       'User-Agent': 'request',
-      'Authorization': githubToken
+      'Authorization': 'githubToken',
+      'json': 'true'
     }
   };
 
@@ -18,11 +19,23 @@ function getRepoContributors(repoOwner, repoName, cb) {
   });
 }
 
+function getAvatar(err, str) {
+  var arr = JSON.parse(str);
+  // console.log(arr);
+  arr.forEach(function(element) {
+    console.log(element.avatar_url);
+    // console.log(element);
+  });
+}
 
-getRepoContributors('jquery', 'jquery', function(err, result) {
-  console.log("errors:", err);
-  console.log("Result:", result);
-});
+
+
+getRepoContributors('Lighthouse-labs', 'iOS_Swift_1_Playground', getAvatar);
+
+// getRepoContributors('jquery', 'jquery', function(err, result) {
+//   console.log("errors:", err);
+//   console.log("Result:", result);
+// });
 
   // request.get('https://api.github.com/repos/jquery/jquery/contributors')
 
