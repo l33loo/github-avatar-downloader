@@ -7,7 +7,7 @@ function getRepoContributors(repoOwner, repoName, cb) {
   // Make the function work only if the user inputs the repo owner and the repo name.
   if (repoOwner && repoName) {
 
-    console.log("welcome to the GitHub Avatar Downloader!");
+    console.log('Welcome to the GitHub Avatar Downloader!');
 
     // Make token secret to outsiders.
     var githubToken = require('./secrets');
@@ -35,13 +35,13 @@ function getRepoContributors(repoOwner, repoName, cb) {
 function downloadImageByURL(url, filePath) {
   var fs = require('fs');
 
-  // Get the url from the server.
+  // Get the URL from the server.
   request.get(url)
     .on('error', function(err) {
       throw err;
     })
 
-    // Pipe (write) the url into a file.
+    // Pipe (write) the URL into a file.
     .pipe(fs.createWriteStream(filePath))
 
     // When the piping is done, print that the download in complete.
@@ -60,7 +60,7 @@ function getAvatar(err, str) {
   arr.forEach(function(element) {
 
     // Fetch each object's avatar.
-    downloadImageByURL(element.avatar_url, "./avatars/" + element.login + ".jpeg");
+    downloadImageByURL(element.avatar_url, './avatars/' + element.login + '.jpeg');
 
     // Print which image of how many is downloading.
     console.log('Downloading image ' + (arr.indexOf(element) + 1) + ' of ' + arr.length);
